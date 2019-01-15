@@ -15,6 +15,8 @@ int static_algo(int k, int p, double radius, std::vector<Point>& points)
             {
                 G[i].insert(j);
                 G[j].insert(i);
+                E[i].insert(j);
+                E[j].insert(i);
             }
             else if (dist_point(points[i],points[j]) < 3*radius)
             {
@@ -30,20 +32,21 @@ int static_algo(int k, int p, double radius, std::vector<Point>& points)
         int i_max_G = 0;
         for(int i = 0; i < n; i++)
         {
-            if (!covered[i] && G[i].size() > max_G){
+            if (!covered[i] && G[i].size()+1 > max_G){
                 max_G = G[i].size();
                 i_max_G = i;
             }
         }
 
+
         for(const int i: E[i_max_G])
         {
             covered[i] = true;
             for(const int l: G[i]){
-                G[l].erase(i);
+                if (l != i_max_G) G[l].erase(i);
             }
             for(const int l: E[i]){
-                E[l].erase(i);
+                if (l != i_max_G) E[l].erase(i);
             }
             G[i] = {};
             E[i] = {};
