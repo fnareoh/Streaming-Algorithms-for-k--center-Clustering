@@ -1,7 +1,7 @@
 #include "static.hpp"
 
 
-int static_algo(int k, int p, double radius, std::vector<Point>& points)
+tuple<bool,std::vector<Point>> static_algo(int k, int p, double radius, std::vector<Point>& points)
 {
     int n = points.size();
     std::vector<std::unordered_set<int>> G(n);
@@ -26,6 +26,7 @@ int static_algo(int k, int p, double radius, std::vector<Point>& points)
         }
     }
 
+    std::vector<Point> cluster_center;
     for (int step = 0; step < k; step++)
     {
         int max_G = 0;
@@ -38,7 +39,7 @@ int static_algo(int k, int p, double radius, std::vector<Point>& points)
             }
         }
 
-
+        cluster_center.push_back(points[i_max_G]);
         for(const int i: E[i_max_G])
         {
             covered[i] = true;
@@ -60,5 +61,5 @@ int static_algo(int k, int p, double radius, std::vector<Point>& points)
     int nb_covered = 0;
     for(int i = 0; i < n; i++) if (covered[i]) nb_covered++;
 
-    return (nb_covered >= p);
+    return make_tuple(nb_covered >= p,cluster_center);
 }
