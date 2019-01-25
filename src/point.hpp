@@ -10,4 +10,4 @@ class Point{
     private:
 };
 
-double dist_point(Point& a, Point& b);
+double dist_point(Point* &a, Point* &b);
