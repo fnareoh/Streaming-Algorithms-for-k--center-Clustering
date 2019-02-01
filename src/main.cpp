@@ -42,7 +42,7 @@ bool get_batch(std::istream& stream, std::vector<Point*>& free_points, int size_
 }
 
 int streaming_test(int k, int z){
-    int alpha = 4;
+    double alpha = 1.1;
     int beta = 8;
     int eta = 16;
     int m = 1;
