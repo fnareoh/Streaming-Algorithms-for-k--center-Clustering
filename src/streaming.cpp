@@ -53,7 +53,7 @@ std::tuple<double,std::vector<Point*>,std::vector<std::vector<Point*>>,std::vect
                     support_cluster.push_back(free_points[i]);
                     support_point.push_back(support_cluster);
                     step3 = false;
-                    std::cout << "a cluster_center was added: " << free_points[i]->x << " " << free_points[i]->y << std::endl;
+                    //std::cout << "a cluster_center was added: " << free_points[i]->x << " " << free_points[i]->y << std::endl;
                 }
             }
         }
@@ -78,7 +78,7 @@ std::tuple<double,std::vector<Point*>,std::vector<std::vector<Point*>>,std::vect
     /* step 4 */
     if (!done) {
         r = alpha*r;
-        std::cout << "r is multiplied by four: " << r  << std::endl;
+        //std::cout << "r is multiplied by four: " << r  << std::endl;
         std::vector<Point*> new_cluster_center;
         std::vector<std::vector<Point*>> new_support_point;
         std::vector<bool> conflict(n,false);
@@ -86,7 +86,7 @@ std::tuple<double,std::vector<Point*>,std::vector<std::vector<Point*>>,std::vect
             if (!conflict[i]){
                 new_cluster_center.push_back(cluster_center[i]);
                 new_support_point.push_back(support_point[i]);
-                std::cout << "a cluster_center was kept: " << cluster_center[i]->x << " " << cluster_center[i]->y << std::endl;
+                //std::cout << "a cluster_center was kept: " << cluster_center[i]->x << " " << cluster_center[i]->y << std::endl;
                 for(int j = i+1; j < cluster_center.size(); j++){
                     for(Point* point_i: support_point[i]){
                         for(Point* point_j: support_point[j]){
@@ -96,7 +96,7 @@ std::tuple<double,std::vector<Point*>,std::vector<std::vector<Point*>>,std::vect
                 }
             }
             else {
-                std::cout << "a cluster_center was dropped: " << cluster_center[i]->x << " " << cluster_center[i]->y  << std::endl;
+                //std::cout << "a cluster_center was dropped: " << cluster_center[i]->x << " " << cluster_center[i]->y  << std::endl;
                 for(Point* point_i: support_point[i]){
                     delete[] point_i;
                 }

@@ -11,3 +11,5 @@ class Point{
 };
 
 double dist_point(Point* &a, Point* &b);
+
+bool greater_point(Point* &a, Point* &b);
